@@ -26,9 +26,9 @@ export default class TwitterLogin extends Component {
       return;
     }
     // Successfully logged in
-    Alert.alert(`Welcome ${loginData.userName}`);
-  });
-}
+    Alert.alert(`Welcome ${loginData.userName}, access token: ${loginData.authToken}, secret access token: ${loginData.authTokenSecret}`);
+    });
+  }
 
   render() {
     return (
@@ -43,7 +43,7 @@ export default class TwitterLogin extends Component {
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
-        
+
         <TouchableHighlight onPress={this.onLoginClick.bind(this)}>
           <View style={styles.button}>
             <Text style={styles.buttonText}>Connect with Twitter</Text>
