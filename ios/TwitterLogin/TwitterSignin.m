@@ -22,7 +22,7 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(logIn:(RCTResponseSenderBlock)callback)
 {
-  [Fabric with:@[[Twitter class]]];
+  //[Fabric with:@[[Twitter class]]];
   
   [[Twitter sharedInstance] logInWithCompletion:^(TWTRSession *session, NSError *error) {
     if (error) {

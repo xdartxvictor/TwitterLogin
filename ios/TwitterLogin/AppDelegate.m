@@ -29,11 +29,15 @@
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
-  [[Twitter sharedInstance] startWithConsumerKey:@"hTpkPVU4pThkM0" consumerSecret:@"ovEqziMzLpUOF163Qg2mj"];
+  [[Twitter sharedInstance] startWithConsumerKey:@"0AYFJqHqbhWr2ivUx22G9OEQ2" consumerSecret:@"9L57HAEeEikrHjLSGxiWsUfqc3r7VpoXaSq5mlTSOZpYMambAm"];
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+  return [[Twitter sharedInstance] application:app openURL:url options:options];
 }
 
 @end
