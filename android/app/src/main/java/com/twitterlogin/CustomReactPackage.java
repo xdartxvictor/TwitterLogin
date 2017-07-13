@@ -1,5 +1,8 @@
 package com.twitterlogin;
 
+import android.app.Activity;
+import android.content.Intent;
+
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
@@ -7,6 +10,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,6 +19,10 @@ import java.util.List;
  */
 
 public class CustomReactPackage implements ReactPackage {
+
+    private TwitterSignin TwitterSigninModule = null;
+    private static CustomReactPackage instance = null;
+
     @Override
     public List<Class<? extends JavaScriptModule>> createJSModules() {
         return Collections.emptyList();
@@ -28,10 +36,28 @@ public class CustomReactPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(
             ReactApplicationContext reactContext) {
-        List<NativeModule> modules = new ArrayList<>();
+//        List<NativeModule> modules = new ArrayList<>();
+//
+//        modules.add(new TwitterSignin(reactContext));
+//
+//        return modules;
+        TwitterSigninModule = new TwitterSignin(reactContext);
+        if (instance == null) {
+            instance = this;
+        }
 
-        modules.add(new TwitterSignin(reactContext));
+        return Arrays.<NativeModule>asList(TwitterSigninModule);
+    }
 
-        return modules;
+    public static CustomReactPackage getInstance() {
+        if (instance == null) {
+            instance = new CustomReactPackage();
+        }
+
+        return instance;
+    }
+
+    public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+        TwitterSigninModule.onActivityResult(activity, requestCode, resultCode, data);
     }
 }

@@ -11,15 +11,15 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  Alert
 } from 'react-native';
 
 export default class TwitterLogin extends Component {
   onLoginClick() {
     TwitterLoginAndroid.login(
-      {}, // no config yet
-      (uri) => { console.log(uri) },
-      (error) => { console.log(error) }
+      (loginData) => { Alert.alert(`Welcome `);}
+      //loginData) => { Alert.alert(`Welcome ${loginData.userName}, access token: ${loginData.authToken}, secret access token: ${loginData.authTokenSecret}`);}
     )
   }
 
